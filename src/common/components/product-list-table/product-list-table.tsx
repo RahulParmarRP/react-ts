@@ -23,6 +23,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import Data from "../../interfaces/product";
 
 // interface Data {
 //   calories: number;
@@ -32,15 +33,6 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 //   protein: number;
 // }
 
-
-// interface Product {
-//   id: number;
-//   name: string;
-//   description: string;
-//   price: number;
-// }
-
-//var rows: Product[];
 // function createData(
 //   name: string,
 //   calories: number,
@@ -112,11 +104,10 @@ const headRows: HeadRow[] = [
   {
     id: "name",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "name"
   },
   { id: "price", numeric: true, disablePadding: false, label: "price" },
-  { id: "image", numeric: false, disablePadding: false, label: "image" },
   {
     id: "image",
     numeric: false,
@@ -178,7 +169,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         {headRows.map(row => (
           <TableCell
             key={row.id}
-            align={row.numeric ? "right" : "left"}
+            align="right" //{row.numeric ? "right" : "left"}
             padding={row.disablePadding ? "none" : "default"}
             sortDirection={orderBy === row.id ? order : false}
           >
@@ -304,16 +295,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Data {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-}
+// interface Data {
+//   id: number;
+//   name: string;
+//   description: string;
+//   image: string;
+//   price: number;
+// }
 
-export default function EnhancedTable(props) {
-  let rows = props.items;
+export default function EnhancedTable(props: { items: Data[] }) {
+  var rows = props.items;
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("price");
@@ -431,13 +422,16 @@ export default function EnhancedTable(props) {
                       </TableCell>
                       <TableCell align="right">{row.price}</TableCell>
                       <TableCell align="right">{row.image}</TableCell>
-                      <TableCell align="right">{row.image}</TableCell>
                       <TableCell align="right">{row.description}</TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
+                <TableRow
+                  style={{
+                    height: 49 * emptyRows
+                  }}
+                >
                   <TableCell colSpan={6} />
                 </TableRow>
               )}

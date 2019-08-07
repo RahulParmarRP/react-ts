@@ -8,6 +8,7 @@ import {
   createStyles,
   fade
 } from "@material-ui/core/styles";
+import Data from "../../common/interfaces/product";
 
 const drawerWidth = 240;
 
@@ -95,15 +96,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-interface Data {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-}
+// interface Data {
+//   id: number;
+//   name: string;
+//   description: string;
+//   image: string;
+//   price: number;
+// }
 
-let productsList: Data[] = [];
+var productsList: Data[] = [];
 
 class MainContent extends React.Component {
   state = {
@@ -113,10 +114,14 @@ class MainContent extends React.Component {
   };
 
   componentDidMount() {
-    fetch("http://jsonplaceholder.typicode.com/users")
+    debugger;
+    //fetch("http://jsonplaceholder.typicode.com/users")
+    //fetch("https://localhost:44305/api/products", { mode: "no-cors" })
+    fetch("https://localhost:44305/api/products")
       .then(response => response.json())
       .then(
         result => {
+          debugger;
           this.setState({
             isLoaded: true,
             products: result
