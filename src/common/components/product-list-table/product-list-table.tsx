@@ -241,7 +241,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Nutrition
+            Products
           </Typography>
         )}
       </div>
@@ -397,7 +397,9 @@ export default function EnhancedTable(props: { items: Data[] }) {
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event =>
+                        handleClick(event, row.name)
+                      }
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -416,13 +418,20 @@ export default function EnhancedTable(props: { items: Data[] }) {
                         component="th"
                         id={labelId}
                         scope="row"
-                        padding="none"
+                        // padding="none"
+                        align="right"
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">{row.image}</TableCell>
-                      <TableCell align="right">{row.description}</TableCell>
+                      <TableCell align="right">
+                        {row.price}
+                      </TableCell>
+                      <TableCell align="right">
+                        {row.image}
+                      </TableCell>
+                      <TableCell align="right">
+                        {row.description}
+                      </TableCell>
                     </TableRow>
                   );
                 })}

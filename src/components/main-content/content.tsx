@@ -9,6 +9,8 @@ import {
   fade
 } from "@material-ui/core/styles";
 import Data from "../../common/interfaces/product";
+import ProductCard from "../../common/components/profile-card/profile-card";
+import Grid from "@material-ui/core/Grid";
 
 const drawerWidth = 240;
 
@@ -114,14 +116,12 @@ class MainContent extends React.Component {
   };
 
   componentDidMount() {
-    debugger;
     //fetch("http://jsonplaceholder.typicode.com/users")
     //fetch("https://localhost:44305/api/products", { mode: "no-cors" })
     fetch("https://localhost:44305/api/products")
       .then(response => response.json())
       .then(
         result => {
-          debugger;
           this.setState({
             isLoaded: true,
             products: result
@@ -146,7 +146,28 @@ class MainContent extends React.Component {
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
+        <Grid container xs={12}>
+          <Grid item xs={6}>
+            dasdf
+          </Grid>
+          <Grid item xs={6}>
+            dasdf
+          </Grid>
+        </Grid>
         <ProductListTable items={this.state.products} />
+        <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
+          ullamcorper eget nulla facilisi etiam dignissim diam.
+        </Typography>
+        <Grid container item xs={12} spacing={3}>
+          {this.state.products.map(product => {
+            return (
+              <Grid item xs={12} sm={3}>
+                <ProductCard product={product} />
+              </Grid>
+            );
+          })}
+        </Grid>
       </Container>
     );
   }
