@@ -118,7 +118,7 @@ class MainContent extends React.Component {
   componentDidMount() {
     //fetch("http://jsonplaceholder.typicode.com/users")
     //fetch("https://localhost:44305/api/products", { mode: "no-cors" })
-    fetch("https://localhost:44305/api/products")
+    fetch("https://localhost:44305/api/products/")
       .then(response => response.json())
       .then(
         result => {
@@ -146,20 +146,20 @@ class MainContent extends React.Component {
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
-        <Grid container xs={12}>
+        {/* <Grid container xs={12}>
           <Grid item xs={6}>
             dasdf
           </Grid>
           <Grid item xs={6}>
             dasdf
           </Grid>
-        </Grid>
+        </Grid> */}
         <ProductListTable items={this.state.products} />
         <Typography paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
-        <Grid container item xs={12} spacing={3}>
+        {/* <Grid container item xs={12} spacing={3}>
           {this.state.products.map(product => {
             return (
               <Grid item xs={12} sm={3}>
@@ -167,7 +167,7 @@ class MainContent extends React.Component {
               </Grid>
             );
           })}
-        </Grid>
+        </Grid> */}
       </Container>
     );
   }
