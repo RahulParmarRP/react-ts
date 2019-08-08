@@ -159,7 +159,7 @@ class MainContent extends React.Component {
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
-        {/* <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={3}>
           {this.state.products.map(product => {
             return (
               <Grid item xs={12} sm={3}>
@@ -167,7 +167,7 @@ class MainContent extends React.Component {
               </Grid>
             );
           })}
-        </Grid> */}
+        </Grid>
       </Container>
     );
   }
