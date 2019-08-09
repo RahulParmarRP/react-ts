@@ -38,7 +38,7 @@ import Data from "../../interfaces/product";
 // interface styleProps{
 //     classes:  typeof styles
 // }
-const url = "https://localhost:44305/api/products";
+
 class ProductForm extends React.Component<{}, Data> {
   constructor(prop: Readonly<{}>) {
     super(prop);
@@ -49,14 +49,15 @@ class ProductForm extends React.Component<{}, Data> {
       description: "",
       price: 0
     };
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
   }
+
   // static propTypes: { classes: PropTypes.Validator<object> };
 
   handleInputChange(event: any) {
-    debugger;
-
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
@@ -64,35 +65,39 @@ class ProductForm extends React.Component<{}, Data> {
   }
 
   onSubmit(event: any) {
-    debugger;
-    console.log(this.state);
-    fetch(url, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
 
-      //make sure to serialize your JSON body
-      body: JSON.stringify(this.state)
-    })
-      .then(response => response.json())
-      .then(result => {}, error => {});
-
-    // fetch("https://localhost:44305/api/products", {
-    //   headers: { "Content-Type": "application/json; charset=utf-8" },
+    // fetch("https://localhost:44305/api/products/", {
     //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   },
+
+    //   //make sure to serialize your JSON body
     //   body: JSON.stringify(this.state)
     // })
     //   .then(response => response.json())
-    //   .then(
-    //     result => {
-    //       console.log("success");
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
+    //   .then(result => {}, error => {});
+
+    fetch("https://localhost:44305/api/products/", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(response => response.json())
+      .then(
+        result => {
+          debugger;
+          console.log("success");
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
     //   axios({
     //     method: "post",
     //     url: "myurl",
@@ -107,6 +112,7 @@ class ProductForm extends React.Component<{}, Data> {
     //       //handle error
     //       console.log(response);
     //     });
+
   }
 
   render() {
