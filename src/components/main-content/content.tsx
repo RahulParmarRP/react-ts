@@ -11,6 +11,8 @@ import {
 import Data from "../../common/interfaces/product";
 import ProductCard from "../../common/components/profile-card/profile-card";
 import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
+import ProductForm from "../../common/components/product-form/product-form";
 
 const drawerWidth = 240;
 
@@ -109,12 +111,13 @@ const useStyles = makeStyles((theme: Theme) =>
 var productsList: Data[] = [];
 
 class MainContent extends React.Component {
+
   state = {
     error: null,
     isLoaded: false,
     products: productsList
   };
-
+  
   componentDidMount() {
     //fetch("http://jsonplaceholder.typicode.com/users")
     //fetch("https://localhost:44305/api/products", { mode: "no-cors" })
@@ -137,6 +140,7 @@ class MainContent extends React.Component {
   }
 
   render() {
+    
     return (
       <Container className="useStyles.root">
         <Typography paragraph>
@@ -146,14 +150,16 @@ class MainContent extends React.Component {
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
-        {/* <Grid container xs={12}>
+        <Grid container xs={12}>
           <Grid item xs={6}>
-            dasdf
+            <ProductListTable items={this.state.products} />
           </Grid>
           <Grid item xs={6}>
-            dasdf
+            <Grid container xs={12}>
+              <ProductForm />
+            </Grid>
           </Grid>
-        </Grid> */}
+        </Grid>
         <ProductListTable items={this.state.products} />
         <Typography paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
@@ -172,4 +178,5 @@ class MainContent extends React.Component {
     );
   }
 }
+
 export default MainContent;
