@@ -11,7 +11,7 @@ import {
 import Data from "../../common/interfaces/product";
 import ProductCard from "../../common/components/profile-card/profile-card";
 import Grid from "@material-ui/core/Grid";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import ProductForm from "../../common/components/product-form/product-form";
 
 const drawerWidth = 240;
