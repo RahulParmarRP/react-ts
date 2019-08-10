@@ -51,8 +51,7 @@ class ProductForm extends React.Component<{}, Data> {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
+    this.onProductAdd = this.onProductAdd.bind(this);
   }
 
   // static propTypes: { classes: PropTypes.Validator<object> };
@@ -64,8 +63,9 @@ class ProductForm extends React.Component<{}, Data> {
     });
   }
 
-  onSubmit(event: any) {
-
+  onProductAdd(event: any) {
+    event.preventDefault();
+    debugger;
     // fetch("https://localhost:44305/api/products/", {
     //   method: "POST",
     //   headers: {
@@ -85,40 +85,29 @@ class ProductForm extends React.Component<{}, Data> {
         Accept: "application/json",
         "Content-Type": "application/json; charset=utf-8"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({ ...this.state, categoryId: 4 })
     })
       .then(response => response.json())
       .then(
         result => {
           debugger;
           console.log("success");
+          console.log(result.id);
         },
         error => {
           console.log(error);
         }
       );
-
-    //   axios({
-    //     method: "post",
-    //     url: "myurl",
-    //     data: this.state,
-    //     config: { headers: { "Content-Type": "multipart/form-data" } }
-    //   })
-    //     .then(function(response) {
-    //       //handle success
-    //       console.log(response);
-    //     })
-    //     .catch(function(response) {
-    //       //handle error
-    //       console.log(response);
-    //     });
-
   }
 
   render() {
     return (
       <Paper style={{ padding: 5, margin: 20 }}>
-        <form className="container" autoComplete="off" onSubmit={this.onSubmit}>
+        <form
+          className="container"
+          autoComplete="off"
+          onSubmit={this.onProductAdd}
+        >
           <TextField
             id="standard-full-width"
             label="Product Name"
