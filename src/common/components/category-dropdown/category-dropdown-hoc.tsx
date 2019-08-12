@@ -10,7 +10,6 @@ import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { withStyles, WithStyles } from "@material-ui/styles";
 
-//const useStyles = (theme: Theme) =>
 const useStyles = createStyles({
   root: {
     display: "flex",
@@ -25,58 +24,89 @@ const useStyles = createStyles({
   }
 });
 
-
 type State = {
-  age: string | number;
+  id: number;
   name: string;
+  isDataFetched: boolean;
+  categoryList: Array<Category>;
 };
 
-export interface IProps extends WithStyles<typeof useStyles> {}
-//export interface IProps extends WithStyles<typeof styles> { }
+export interface IProps extends WithStyles<typeof useStyles> {
+  onCategoryChange: (event: any) => void;
+}
+interface Category {
+  id: number;
+  name: string;
+  description: string;
+}
 
 class CategoryDropdown extends React.Component<IProps, State> {
-  constructor(prop: Readonly<IProps>) {
+  constructor(prop: IProps) {
     super(prop);
     this.state = {
-      age: "",
-      name: "Select Category"
+      id: 0,
+      name: "Select Category",
+      isDataFetched: false,
+      categoryList: []
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // static propTypes: { classes: PropTypes.Validator<object> };
-
   handleChange(event: any) {
     debugger;
+
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
     });
-    }
+    event.target.name = "catgoryId";
+    this.props.onCategoryChange(event);
+  }
+
+  componentDidMount() {
+    fetch("https://localhost:44305/api/categories/")
+      .then(response => response.json())
+      .then(
+        result => {
+          this.setState({
+            isDataFetched: true,
+            categoryList: result
+          });
+        },
+        error => {}
+      );
+  }
 
   render() {
-    const { age, name } = this.state;
+    const { id, name, categoryList } = this.state;
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <FormControl className={classes.formControl}>
+        <FormControl
+          //className={classes.formControl}
+          fullWidth
+        >
           <InputLabel shrink htmlFor="age-native-label-placeholder">
             Category
           </InputLabel>
           <NativeSelect
-            name="age"
-            value={this.state.age}
+            name="id"
+            value={id}
             onChange={this.handleChange}
             // input={<Input name="age" id="age-native-label-placeholder" />}
           >
             <option value="">None</option>
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            if(isDataFetched)
+            {categoryList.map(category => {
+              return (
+                <option key={category.id.toString()} value={category.id}>
+                  {category.name}
+                </option>
+              );
+            })}
           </NativeSelect>
-
           <FormHelperText>Select category for the product</FormHelperText>
         </FormControl>
       </div>
@@ -84,9 +114,7 @@ class CategoryDropdown extends React.Component<IProps, State> {
   }
 }
 
-
 export default withStyles(useStyles)(CategoryDropdown);
-//export default withStyles(styles)(CategoryDropdown);
 
 // const styles = (theme: Theme) => ({
 //   root: {
