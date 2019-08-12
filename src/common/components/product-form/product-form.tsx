@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Paper from "@material-ui/core/Paper";
 import Data from "../../interfaces/product";
+import CategoryDropDown from "../category-dropdown/category-dropdown-hoc";
 // const styles = (theme:Theme) => ({
 //   root: {
 //     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -134,6 +135,8 @@ class ProductForm extends React.Component<{}, Data> {
               shrink: true
             }}
           />
+          <CategoryDropDown />
+          
           <TextField
             id="standard-multiline-static"
             label="Description"
