@@ -7,7 +7,6 @@ const App: React.FC = () => {
   return (
     <BrowserRouter> 
       <div>
-        {/* <Route path="/" exact component={Dashboard} /> */}
         <Dashboard />
       </div>
     </BrowserRouter>

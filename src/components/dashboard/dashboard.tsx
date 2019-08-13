@@ -11,7 +11,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-//import MailIcon from '@material-ui/icons/Mail';
 import SearchIcon from "@material-ui/icons/Search";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -348,7 +347,6 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {/* <MainContent /> */}
           <Switch>
             <Route exact path="/products/add" component={MainContent} />
             <Route exact path="/products" component={Products} />

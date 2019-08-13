@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import Data from "../../common/interfaces/product";
 import ProductCard from "../../common/components/profile-card/profile-card";
 import Grid from "@material-ui/core/Grid";
-//import PropTypes from "prop-types";
 // import ProductForm from "../../common/components/product-form/product-form";
 // import { Switch } from "react-router-dom";
 // import { Router, Route, Link } from "react-router-dom";
