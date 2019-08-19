@@ -141,6 +141,16 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
     setMobileMoreAnchorEl
   ] = React.useState<null | HTMLElement>(null);
 
+  const [open, setOpen] = React.useState(false);
+
+  function handleDrawerOpen() {
+    setOpen(true);
+  }
+
+  function handleDrawerClose() {
+    setOpen(false);
+  }
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -270,7 +280,8 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              //onClick={handleDrawerToggle}
+              onClick={open ? handleDrawerClose : handleDrawerOpen}
               className={classes.menuButton}
             >
               <MenuIcon />
@@ -370,8 +381,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
               classes={{
                 paper: classes.drawerPaper
               }}
-              variant="permanent"
-              open
+              variant="temporary"
             >
               {drawer}
             </Drawer>
