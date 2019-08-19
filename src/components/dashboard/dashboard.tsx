@@ -28,6 +28,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MainContent from "../main-content/main-content";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Switch } from "react-router-dom";
@@ -147,7 +148,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
     setMobileOpen(!mobileOpen);
   }
 
-  function handleProfileMenuOpen(event: React.MouseEvent<HTMLElement>) {
+  function handleMenuOpen(event: React.MouseEvent<HTMLElement>) {
     setAnchorEl(event.currentTarget);
   }
 
@@ -192,13 +193,26 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        <IconButton
+          aria-label="show 4 new mails"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <Badge badgeContent={4} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Cart</p>
+      </MenuItem>
+      {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
@@ -207,7 +221,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -227,8 +241,12 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
       <List>
         {["Products", "Categories", "Cart", "Contact", "About"].map(
           (text, index) => (
-            <Link to={"/" + text.toLowerCase()} key={index} className="SideNavLink">
-              <ListItem button key={text}> 
+            <Link
+              to={"/" + text.toLowerCase()}
+              key={index}
+              className="SideNavLink"
+            >
+              <ListItem button key={text}>
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
@@ -275,13 +293,27 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton aria-label="show 4 new mails" color="inherit">
+              {/* <IconButton aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />
+                </Badge>
+              </IconButton> */}
+              <IconButton
+                aria-label="show 4 new mails"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleMenuOpen}
+                color="inherit"
+              >
+                <Badge badgeContent={4} color="secondary">
+                  <ShoppingCartIcon />
                 </Badge>
               </IconButton>
               <IconButton
                 aria-label="show 17 new notifications"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleMenuOpen}
                 color="inherit"
               >
                 <Badge badgeContent={17} color="secondary">
@@ -293,7 +325,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
+                onClick={handleMenuOpen}
                 color="inherit"
               >
                 <AccountCircle />
