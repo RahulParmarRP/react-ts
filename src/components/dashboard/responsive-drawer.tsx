@@ -43,6 +43,7 @@ import { Switch } from "react-router-dom";
 // Application components
 import Products from "../products/products";
 import MainContent from "../main-content/main-content";
+import ShoppingCart from "../shopping-cart/shopping-cart";
 
 const drawerWidth = 240;
 const menuId = "primary-search-account-menu";
@@ -458,7 +459,8 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
                   <MailIcon />
                 </Badge>
               </IconButton> */}
-                <IconButton
+
+                {/* <IconButton
                   aria-label="show 4 new mails"
                   aria-controls={menuId}
                   aria-haspopup="true"
@@ -468,7 +470,8 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
                   <Badge badgeContent={4} color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
-                </IconButton>
+                </IconButton> */}
+                <ShoppingCart />
                 <IconButton
                   aria-label="show 17 new notifications"
                   aria-controls={menuId}

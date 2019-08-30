@@ -63,6 +63,7 @@ class ProductForm extends React.Component<{}, Data> {
       [event.target.name]: event.target.value
     });
   }
+  
 
   onProductAdd(event: any) {
     event.preventDefault();
