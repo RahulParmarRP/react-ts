@@ -7,7 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import Data from "../../interfaces/product";
 import CardMedia from "@material-ui/core/CardMedia";
-
+import AddProductButton from "../../../components/icons/add-button";
+import RemoveProductButton from "../../../components/icons/remove-button";
 const useStyles = makeStyles({
   card: {
     maxWidth: 200
@@ -56,12 +57,13 @@ export default function SimpleCard(props: { product: Data }) {
         </Typography>
         <Typography variant="body2" component="p">
           {props.product.description + " description"}
-          <br />
           {'"a benevolent smile"'}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <RemoveProductButton />
+        <Button size="small">More</Button>
+        <AddProductButton />
       </CardActions>
     </Card>
   );

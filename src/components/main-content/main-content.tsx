@@ -9,11 +9,8 @@ import ProductListTable from "../../common/components/product-list-table/product
 //   fade
 // } from "@material-ui/core/styles";
 import Data from "../../common/interfaces/product";
-import ProductCard from "../../common/components/profile-card/profile-card";
 import Grid from "@material-ui/core/Grid";
-//import PropTypes from "prop-types";
 import ProductForm from "../../common/components/product-form/product-form";
-
 //const drawerWidth = 240;
 
 // const useStyles = makeStyles((theme: Theme) =>
@@ -110,13 +107,12 @@ import ProductForm from "../../common/components/product-form/product-form";
 var productsList: Data[] = [];
 
 class MainContent extends React.Component {
-
   state = {
     error: null,
     isLoaded: false,
     products: productsList
   };
-  
+
   componentDidMount() {
     debugger;
     //fetch("http://jsonplaceholder.typicode.com/users")
@@ -140,9 +136,8 @@ class MainContent extends React.Component {
   }
 
   render() {
-    
     return (
-      <Container className="useStyles.root">
+      <Container>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
         </Typography>
@@ -150,30 +145,17 @@ class MainContent extends React.Component {
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
-        <Grid container >
+        <Grid container>
           <Grid item xs={6}>
             <ProductListTable items={this.state.products} />
           </Grid>
           <Grid item xs={6}>
-            <Grid container >
+            <Grid container>
               <ProductForm />
             </Grid>
           </Grid>
         </Grid>
         <ProductListTable items={this.state.products} />
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam.
-        </Typography>
-        <Grid container spacing={3}>
-          {this.state.products.map(product => {
-            return (
-              <Grid item key={product.id.toString()}>
-                <ProductCard product={product} />
-              </Grid>
-            );
-          })}
-        </Grid>
       </Container>
     );
   }

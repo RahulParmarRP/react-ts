@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Paper from "@material-ui/core/Paper";
 import Data from "../../interfaces/product";
+import CategoryDropDown from "../category-dropdown/category-dropdown-hoc";
 // const styles = (theme:Theme) => ({
 //   root: {
 //     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -47,6 +48,7 @@ class ProductForm extends React.Component<{}, Data> {
       image: "",
       name: "",
       description: "",
+      categoryId: 0,
       price: 0
     };
 
@@ -54,9 +56,8 @@ class ProductForm extends React.Component<{}, Data> {
     this.onProductAdd = this.onProductAdd.bind(this);
   }
 
-  // static propTypes: { classes: PropTypes.Validator<object> };
-
   handleInputChange(event: any) {
+    debugger;
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
@@ -66,26 +67,13 @@ class ProductForm extends React.Component<{}, Data> {
   onProductAdd(event: any) {
     event.preventDefault();
     debugger;
-    // fetch("https://localhost:44305/api/products/", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   },
-
-    //   //make sure to serialize your JSON body
-    //   body: JSON.stringify(this.state)
-    // })
-    //   .then(response => response.json())
-    //   .then(result => {}, error => {});
-
     fetch("https://localhost:44305/api/products/", {
       method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json; charset=utf-8"
       },
-      body: JSON.stringify({ ...this.state, categoryId: 4 })
+      body: JSON.stringify(this.state)
     })
       .then(response => response.json())
       .then(
@@ -134,6 +122,7 @@ class ProductForm extends React.Component<{}, Data> {
               shrink: true
             }}
           />
+          <CategoryDropDown onCategoryChange={this.handleInputChange} /> 
           <TextField
             id="standard-multiline-static"
             label="Description"
