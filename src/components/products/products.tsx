@@ -9,11 +9,13 @@ import Typography from "@material-ui/core/Typography";
 //   fade
 // } from "@material-ui/core/styles";
 import Data from "../../common/interfaces/product";
-import ProductCard from "../../common/components/profile-card/profile-card";
+import ProductCard from "../../common/components/product-card/product-card";
 import Grid from "@material-ui/core/Grid";
 // import ProductForm from "../../common/components/product-form/product-form";
 // import { Switch } from "react-router-dom";
 // import { Router, Route, Link } from "react-router-dom";
+
+export function addedProductList() {}
 
 var productsList: Data[] = [];
 
@@ -21,7 +23,8 @@ class Products extends React.Component {
   state = {
     error: null,
     isLoaded: false,
-    products: productsList
+    products: productsList,
+    addedToCartProducts: productsList
   };
 
   componentDidMount() {
@@ -45,8 +48,22 @@ class Products extends React.Component {
         }
       );
   }
+  handleAddProductToCart = (addedProduct: Data) => {
+    debugger;
+    const addedToCartProducts = [
+      ...this.state.addedToCartProducts,
+      addedProduct
+    ];
+    this.setState({
+      // addedToCartProducts: [...this.state.addedToCartProducts, addedProduct]
+      addedToCartProducts
+    });
+  };
 
   render() {
+    // used alias for object destructurization
+    const { products: allProducts } = this.state;
+
     return (
       <Container>
         <Typography paragraph>
@@ -54,10 +71,13 @@ class Products extends React.Component {
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
         <Grid container spacing={3}>
-          {this.state.products.map(product => {
+          {allProducts.map(product => {
             return (
               <Grid item key={product.id.toString()}>
-                <ProductCard product={product} />
+                <ProductCard
+                  product={product}
+                  addProductToCart={this.handleAddProductToCart}
+                />
               </Grid>
             );
           })}

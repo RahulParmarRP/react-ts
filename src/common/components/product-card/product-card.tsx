@@ -9,6 +9,7 @@ import Data from "../../interfaces/product";
 import CardMedia from "@material-ui/core/CardMedia";
 import AddProductButton from "../../../components/icons/add-button";
 import RemoveProductButton from "../../../components/icons/remove-button";
+
 const useStyles = makeStyles({
   card: {
     maxWidth: 200
@@ -30,9 +31,16 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard(props: { product: Data }) {
+export default function ProductCard(props: {
+  product: Data;
+  addProductToCart: (addedProduct: Data) => void;
+}) {
   const classes = useStyles();
   //const bull = <span className={classes.bullet}>•</span>;
+
+  // function addToCart(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  //   props.addProductToCart(props.product);
+  // }
 
   return (
     <Card className={classes.card}>
@@ -61,9 +69,15 @@ export default function SimpleCard(props: { product: Data }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <RemoveProductButton />
-        <Button size="small">More</Button>
-        <AddProductButton />
+        {/* <RemoveProductButton /> */}
+        <Button
+          size="large"
+          color="primary"
+          onClick={() => props.addProductToCart(props.product)}
+        >
+          Add To Cart
+        </Button>
+        {/* <AddProductButton /> */}
       </CardActions>
     </Card>
   );

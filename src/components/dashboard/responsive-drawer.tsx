@@ -40,6 +40,10 @@ import {
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Switch } from "react-router-dom";
 
+// Application styles
+import useStyles from "./responsive-drawer-styles";
+import mobileDrawerStyles from "./mobile-drawer-styles";
+
 // Application components
 import Products from "../products/products";
 import MainContent from "../main-content/main-content";
@@ -47,151 +51,6 @@ import MainContent from "../main-content/main-content";
 
 const drawerWidth = 240;
 const menuId = "primary-search-account-menu";
-
-const miniuseStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex"
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    },
-    menuButton: {
-      marginRight: 36
-    },
-    hide: {
-      display: "none"
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: "nowrap"
-    },
-    drawerOpen: {
-      width: drawerWidth,
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    },
-    drawerClose: {
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      overflowX: "hidden",
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9) + 1
-      }
-    },
-    toolbar: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      padding: "0 8px",
-      ...theme.mixins.toolbar
-    },
-    sectionMobile: {
-      display: "flex",
-      [theme.breakpoints.up("md")]: {
-        display: "none"
-      }
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(6)
-    }
-  })
-);
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex"
-    },
-    drawer: {
-      [theme.breakpoints.up("sm")]: {
-        width: drawerWidth,
-        flexShrink: 0
-      }
-    },
-    search: {
-      position: "relative",
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(3),
-        width: "auto"
-      }
-    },
-    searchIcon: {
-      width: theme.spacing(7),
-      height: "100%",
-      position: "absolute",
-      pointerEvents: "none",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    inputRoot: {
-      color: "inherit"
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 7),
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: 200
-      }
-    },
-    appBar: {
-      marginLeft: drawerWidth,
-      [theme.breakpoints.up("sm")]: {
-        width: `calc(100% - ${drawerWidth}px)`
-      }
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up("sm")]: {
-        display: "none"
-      }
-    },
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-      width: drawerWidth
-    },
-    sectionDesktop: {
-      display: "none",
-      [theme.breakpoints.up("md")]: {
-        display: "flex"
-      }
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(6)
-    }
-  })
-);
-
 interface ResponsiveDrawerProps {
   /**
    * Injected by the documentation to work in an iframe.
@@ -199,11 +58,10 @@ interface ResponsiveDrawerProps {
    */
   container?: Element;
 }
-
 export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
   const { container } = props;
   const classes = useStyles();
-  const miniClasses = miniuseStyles();
+  const miniClasses = mobileDrawerStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -214,7 +72,6 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
   ] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -230,7 +87,6 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -285,37 +141,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
     </Menu>
   );
 
-  function handleDrawerOpen() {
-    setOpen(true);
-  }
-
-  function handleDrawerClose() {
-    setOpen(false);
-  }
-
-  function handleDrawerToggle() {
-    setMobileOpen(!mobileOpen);
-  }
-
-  // On menu click render menu for desktop view
-
-  function handleMenuOpen(event: React.MouseEvent<HTMLElement>) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleMobileMenuClose() {
-    setMobileMoreAnchorEl(null);
-  }
-
-  function handleMenuClose() {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  }
-
-  function handleMobileMenuOpen(event: React.MouseEvent<HTMLElement>) {
-    setMobileMoreAnchorEl(event.currentTarget);
-  }
-
+  // Drawer side navbar
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -339,6 +165,36 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
       </List>
     </div>
   );
+
+  function handleDrawerOpen() {
+    setOpen(true);
+  }
+
+  function handleDrawerClose() {
+    setOpen(false);
+  }
+
+  function handleDrawerToggle() {
+    setMobileOpen(!mobileOpen);
+  }
+
+  // On menu click render menu for desktop view
+  function handleMenuOpen(event: React.MouseEvent<HTMLElement>) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleMobileMenuClose() {
+    setMobileMoreAnchorEl(null);
+  }
+
+  function handleMenuClose() {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+
+  function handleMobileMenuOpen(event: React.MouseEvent<HTMLElement>) {
+    setMobileMoreAnchorEl(event.currentTarget);
+  }
 
   return (
     <div className={classes.root}>
@@ -470,7 +326,7 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
                   <Badge badgeContent={4} color="secondary">
                     <ShoppingCartIcon />
                   </Badge>
-                </IconButton> 
+                </IconButton>
                 {/* <ShoppingCart /> */}
                 <IconButton
                   aria-label="show 17 new notifications"
@@ -521,6 +377,11 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
             <div className={classes.toolbar} />
             <Switch>
               <Route exact path="/products/add" component={MainContent} />
+              {/* <Route
+                exact
+                path={"/"}
+                component={() => <Start socket={socket} addUser={addUser} />}
+              /> */}
               <Route exact path="/products" component={Products} />
             </Switch>
           </main>
