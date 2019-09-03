@@ -265,6 +265,8 @@ export default function ResponsiveDrawer(props: ResponsiveDrawerProps) {
             <div className={classes.toolbar} />
             <Switch>
               <Route exact path="/products/add" component={MainContent} />
+              {/* <Route exact path="/products" render={()=><Product products={products}> </Product>} */}
+              {/*For history match of Route <Route exact path="/products" render={(props)=><Product products={products}> </Product>}  {...props}*/}
               <Route exact path="/products" component={Products} />
             </Switch>
           </main>
