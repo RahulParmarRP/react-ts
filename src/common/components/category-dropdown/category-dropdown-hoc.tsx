@@ -56,7 +56,7 @@ class CategoryDropdown extends React.Component<IProps, State> {
   }
 
   handleChange(event: any) {
-    debugger;
+    
 
     this.setState({
       ...this.state,

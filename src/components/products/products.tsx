@@ -15,6 +15,8 @@ import Grid from "@material-ui/core/Grid";
 // import { Switch } from "react-router-dom";
 // import { Router, Route, Link } from "react-router-dom";
 
+// Product Service
+import { getAllProducts } from "../../services/productService";
 export function addedProductList() {}
 
 var productsList: Data[] = [];
@@ -22,34 +24,46 @@ var productsList: Data[] = [];
 class Products extends React.Component {
   state = {
     error: null,
-    isLoaded: false,
+    // isLoaded: false,
     products: productsList,
     addedToCartProducts: productsList
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    // getAllProducts().then(response =>
+    //   console.log("from direct call in component", response)
+    // );
     debugger;
-    //fetch("http://jsonplaceholder.typicode.com/users")
-    //fetch("https://localhost:44305/api/products", { mode: "no-cors" })
-    fetch("https://localhost:44305/api/products/")
-      .then(response => response.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            products: result
-          });
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+    const products = await getAllProducts();
+    // debugger;
+    // setTimeout(() => {
+    //       this.setState({ ...this.state, products: products });
+    // }, 5000);
+
+    this.setState({ ...this.state, products: products });
+    // fetch("http://jsonplaceholder.typicode.com/users")
+    // fetch("https://localhost:44305/api/products", { mode: "no-cors" })
+    // fetch("https://localhost:44305/api/products/")
+    //   .then(response => response.json())
+    //   .then(
+    //     result => {
+    //       ;
+    //       this.setState({
+    //         isLoaded: true,
+    //         products: result
+    //       });
+    //       console.log("from prduct.tsx set state componentDidMount", result);
+    //       ;
+    //     },
+    //     error => {
+    //       this.setState({
+    //         isLoaded: true,
+    //         error
+    //       });
+    //     }
+    //   );
   }
   handleAddProductToCart = (addedProduct: Data) => {
-    debugger;
     const addedToCartProducts = [
       ...this.state.addedToCartProducts,
       addedProduct
@@ -61,8 +75,10 @@ class Products extends React.Component {
   };
 
   render() {
+    debugger;
     // used alias for object destructurization
-    const { products: allProducts } = this.state;
+    // const { products } = this.state.products;
+    const { products } = this.state;
 
     return (
       <Container>
@@ -71,7 +87,7 @@ class Products extends React.Component {
           ullamcorper eget nulla facilisi etiam dignissim diam.
         </Typography>
         <Grid container spacing={3}>
-          {allProducts.map(product => {
+          {products.map(product => {
             return (
               <Grid item key={product.id.toString()}>
                 <ProductCard

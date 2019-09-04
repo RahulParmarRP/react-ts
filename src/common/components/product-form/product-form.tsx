@@ -57,7 +57,7 @@ class ProductForm extends React.Component<{}, Data> {
   }
 
   handleInputChange(event: any) {
-    debugger;
+    
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
@@ -67,7 +67,7 @@ class ProductForm extends React.Component<{}, Data> {
 
   onProductAdd(event: any) {
     event.preventDefault();
-    debugger;
+    
     fetch("https://localhost:44305/api/products/", {
       method: "post",
       headers: {
@@ -79,7 +79,7 @@ class ProductForm extends React.Component<{}, Data> {
       .then(response => response.json())
       .then(
         result => {
-          debugger;
+          
           console.log("success");
           console.log(result.id);
         },

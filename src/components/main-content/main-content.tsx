@@ -114,7 +114,7 @@ class MainContent extends React.Component {
   };
 
   componentDidMount() {
-    debugger;
+    
     //fetch("http://jsonplaceholder.typicode.com/users")
     //fetch("https://localhost:44305/api/products", { mode: "no-cors" })
     fetch("https://localhost:44305/api/products/")

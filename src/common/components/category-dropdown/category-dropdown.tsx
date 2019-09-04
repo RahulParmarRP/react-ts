@@ -38,7 +38,7 @@ export default function NativeSelects() {
   const handleChange = (name: keyof typeof state) => (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
-    debugger;
+    
     setState({
       ...state,
       [name]: event.target.value
