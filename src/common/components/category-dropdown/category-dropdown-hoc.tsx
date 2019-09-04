@@ -31,9 +31,11 @@ type State = {
   categoryList: Array<Category>;
 };
 
-export interface IProps extends WithStyles<typeof useStyles> {
+
+interface IProps extends WithStyles<typeof useStyles> {
   onCategoryChange: (event: any) => void;
 }
+
 interface Category {
   id: number;
   name: string;
